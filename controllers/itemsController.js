@@ -7,25 +7,25 @@ module.exports = {
       .find(req.query)
       .sort({ item: 1})
       .then(items => res.json(items))
-      .catch(err => res.status(422).json(err));
+      .catch(err => res.status(422).json(err))
   },
   findById: function(req, res) {
     db.Item
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => res.status(422).json(err))
   },
   create: function(req, res) {
     db.Item
       .create(req.body)
-      .then(dbItem => res.json(dbItem))
-      .catch(err => res.status(422).json(err));
+      .then(item => res.json(item))
+      .catch(err => res.status(422).json(err))
   },
   update: function(req, res) {
     db.Item
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbItem => res.json(dbItem))
-      .catch(err => res.status(422).json(err));
+      .then(item => res.json(item))
+      .catch(err => res.status(422).json(err))
   },
   remove: function(req, res) {
     db.Item
@@ -34,6 +34,4 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
-
-
 };
