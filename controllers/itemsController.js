@@ -2,14 +2,14 @@ const db = require("../models");
 
 // defining methods for itemController
 module.exports = {
-  findAll: function(req, res) {
+  index: function(req, res) {
     db.Item
       .find(req.query)
       .sort({ item: 1})
       .then(items => res.json(items))
       .catch(err => res.status(422).json(err))
   },
-  findById: function(req, res) {
+  show: function(req, res) {
     db.Item
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
@@ -23,15 +23,15 @@ module.exports = {
   },
   update: function(req, res) {
     db.Item
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then(item => res.json(item))
       .catch(err => res.status(422).json(err))
   },
-  remove: function(req, res) {
+  destroy: function(req, res) {
     db.Item
       .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
+      .then(Item => Item.remove())
+      .then(item => res.json(item))
       .catch(err => res.status(422).json(err));
   }
 };

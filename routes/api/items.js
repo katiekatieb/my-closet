@@ -2,12 +2,12 @@ const router = require("express").Router()
 const itemsController = require("../../controllers/itemsController")
 
 router.route("/")
-  .get(itemsController.findAll)
+  .get(itemsController.index)
   .post(itemsController.create)
 
 router.route("/:id")
-  .get(itemsController.findById)
+  .get(itemsController.show)
   .put(itemsController.update)
-  .delete(itemsController.remove)
+  .delete(itemsController.destroy)
 
 module.exports = router;
